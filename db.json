@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Shiva Krishna Pandilla",
+      "email": "shivakrishna.p@tekriya.com",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "name": "Shiva Krishna",
+      "email": "skrishna343@gmail.com",
+      "role": "admin"
+    },
+    {
+      "id": "3",
+      "name": "P S Krishna",
+      "email": "shivakrishna.july29@gmail.com",
+      "role": "user"
+    }
+  ]
+}
