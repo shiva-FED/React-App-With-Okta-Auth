@@ -13,7 +13,6 @@ function AppRoutes() {
     const user = await oktaAuth.getUser();
     const email = user.email;
 
-    // call DB to get role
     const res = await fetch(`http://localhost:5000/users?email=${email}`);
     const data = await res.json();
 
