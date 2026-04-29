@@ -1,7 +1,7 @@
 import { useEffect, useState, type CSSProperties } from "react";
-import API from "../../services/api";
 import { useOktaAuth } from "@okta/okta-react";
 import { type User } from "../../types/user";
+import { getUserByEmail, updateUser } from "../../services/userService";
 
 const styles: {[key: string]: CSSProperties} = {
   container: {
@@ -60,7 +60,7 @@ export default function UserProfile() {
 
   useEffect(() => {
     if (email) {
-      API.get(`/users?email=${email}`).then((res) => {
+      getUserByEmail(email).then((res) => {
         setUser(res.data[0]);
       });
     }
@@ -68,7 +68,7 @@ export default function UserProfile() {
 
   const updateProfile = async () => {
     if (user) {
-      await API.put(`/users/${user.id}`, user);
+      await updateUser(user.id, user);
       alert("Updated!");
     }
   };

@@ -18,5 +18,6 @@
       "email": "shivakrishna.july29@gmail.com",
       "role": "user"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

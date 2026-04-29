@@ -1,7 +1,7 @@
 import { useEffect, useState, type CSSProperties } from "react";
-import API from "../../services/api";
 import { type User } from "../../types/user";
 import { oktaAuth } from "../../auth/oktaConfig";
+import { getUsers, deleteuser } from "../../services/userService";
 
 const styles: {[key: string]: CSSProperties} = {
   container: {
@@ -61,7 +61,7 @@ export default function AdminDashboard() {
   const [users, setUsers] = useState<User[]>([]);
 
   const fetchUsers = async () => {
-    const res = await API.get("/users");
+    const res = await getUsers();
     const filteredData = res?.data?.filter((user: User) => user.role === 'user')
     setUsers(filteredData);
   };
@@ -71,7 +71,7 @@ export default function AdminDashboard() {
   }, []);
 
   const deleteUser = async (id: number) => {
-    await API.delete(`/users/${id}`);
+    await deleteuser(id);
     fetchUsers();
   };
 
