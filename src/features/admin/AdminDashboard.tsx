@@ -4,6 +4,15 @@ import { oktaAuth } from "../../auth/oktaConfig";
 import { getUsers, deleteuser, updateUser } from "../../services/userService";
 import UpdateForm from "../../shared/updateForm";
 
+const baseButton: CSSProperties = {
+  border: "none",
+  color: "#fff",
+  padding: "8px 12px",
+  borderRadius: "6px",
+  cursor: "pointer",
+  marginRight: "20px"
+}
+
 const styles: { [key: string]: CSSProperties } = {
   modalOverlay: {
     position: "fixed",
@@ -50,22 +59,12 @@ const styles: { [key: string]: CSSProperties } = {
     fontSize: "14px",
   },
   deleteBtn: {
-    background: "#ff4d4f",
-    border: "none",
-    color: "#fff",
-    padding: "8px 12px",
-    borderRadius: "6px",
-    cursor: "pointer",
+    ...baseButton,
+    background: "#ff4d4f"
   },
   button: {
-    width: "fit-content",
-    padding: "10px",
-    background: "#4CAF50",
-    color: "#fff",
-    border: "none",
-    borderRadius: "6px",
-    cursor: "pointer",
-    marginTop: "10px",
+    ...baseButton,
+    background: "#4CAF50"
   },
 };
 
@@ -129,7 +128,7 @@ export default function AdminDashboard() {
               Delete
             </button>
             <button
-              style={styles.deleteBtn}
+              style={styles.button}
               onClick={() => {
                 setSelectedUser(u);
                 setShowModal(true);
