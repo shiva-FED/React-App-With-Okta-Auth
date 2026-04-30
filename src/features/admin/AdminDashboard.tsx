@@ -2,7 +2,7 @@ import { useEffect, useState, type CSSProperties } from "react";
 import { type User } from "../../types/user";
 import { oktaAuth } from "../../auth/oktaConfig";
 import { getUsers, deleteuser, updateUser } from "../../services/userService";
-import UpdateForm from "../../shared/updateForm";
+import UpdateForm from "../../shared/UpdateForm";
 
 const baseButton: CSSProperties = {
   border: "none",
