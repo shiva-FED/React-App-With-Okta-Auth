@@ -14,8 +14,14 @@
     },
     {
       "id": "3",
-      "name": "P S Krishna",
+      "name": "P Sailesh Krishna",
       "email": "shivakrishna.july29@gmail.com",
+      "role": "user"
+    },
+    {
+      "id": "4",
+      "name": "Krishna",
+      "email": "krishna@gmail.com",
       "role": "user"
     }
   ],

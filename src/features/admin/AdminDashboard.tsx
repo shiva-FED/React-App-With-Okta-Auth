@@ -3,7 +3,7 @@ import { type User } from "../../types/user";
 import { oktaAuth } from "../../auth/oktaConfig";
 import { getUsers, deleteuser } from "../../services/userService";
 
-const styles: {[key: string]: CSSProperties} = {
+const styles: { [key: string]: CSSProperties } = {
   container: {
     padding: "20px",
     minHeight: "100vh",
@@ -30,7 +30,7 @@ const styles: {[key: string]: CSSProperties} = {
     marginRight: "20px",
   },
   name: {
-    margin: 0
+    margin: 0,
   },
   email: {
     margin: 0,
@@ -62,7 +62,9 @@ export default function AdminDashboard() {
 
   const fetchUsers = async () => {
     const res = await getUsers();
-    const filteredData = res?.data?.filter((user: User) => user.role === 'user')
+    const filteredData = res?.data?.filter(
+      (user: User) => user.role === "user",
+    );
     setUsers(filteredData);
   };
 
@@ -77,7 +79,7 @@ export default function AdminDashboard() {
 
   const signOut = () => {
     oktaAuth.signOut();
-  }
+  };
 
   return (
     <div style={styles.container}>

@@ -3,7 +3,7 @@ import { useOktaAuth } from "@okta/okta-react";
 import { type User } from "../../types/user";
 import { getUserByEmail, updateUser } from "../../services/userService";
 
-const styles: {[key: string]: CSSProperties} = {
+const styles: { [key: string]: CSSProperties } = {
   container: {
     display: "flex",
     justifyContent: "center",
@@ -56,7 +56,7 @@ export default function UserProfile() {
   const [user, setUser] = useState<User | null>(null);
 
   const email = authState?.idToken?.claims.email;
-  console.log("OKTA USER:", authState?.idToken?.claims)
+  console.log("OKTA USER:", authState?.idToken?.claims);
 
   useEffect(() => {
     if (email) {
@@ -77,31 +77,35 @@ export default function UserProfile() {
 
   return (
     <div style={styles.container}>
-  <div style={styles.card}>
-    <h2 style={styles.title}>User Profile</h2>
+      <div style={styles.card}>
+        <h2 style={styles.title}>User Profile</h2>
 
-    <div style={styles.field}>
-      <label style={styles.label}>Name</label>
-      <input
-        style={styles.input}
-        value={user.name}
-        onChange={(e) => setUser({ ...user, name: e.target.value })}
-      />
+        <div style={styles.field}>
+          <label style={styles.label}>Name</label>
+          <input
+            style={styles.input}
+            value={user.name}
+            onChange={(e) => setUser({ ...user, name: e.target.value })}
+          />
+        </div>
+
+        <div style={styles.field}>
+          <label style={styles.label}>Email</label>
+          <input
+            style={{
+              ...styles.input,
+              background: "#eee",
+              cursor: "not-allowed",
+            }}
+            value={user.email}
+            disabled
+          />
+        </div>
+
+        <button style={styles.button} onClick={updateProfile}>
+          Update Profile
+        </button>
+      </div>
     </div>
-
-    <div style={styles.field}>
-      <label style={styles.label}>Email</label>
-      <input
-        style={{ ...styles.input, background: "#eee", cursor: "not-allowed" }}
-        value={user.email}
-        disabled
-      />
-    </div>
-
-    <button style={styles.button} onClick={updateProfile}>
-      Update Profile
-    </button>
-  </div>
-</div>
   );
 }
