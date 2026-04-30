@@ -55,7 +55,7 @@ type updateProfileProps = {
     updateProfile: () => void;
 }
 
-export default function UpdateForm({user, setUser, updateProfile}: updateProfileProps) {
+export default function UpdateForm(props: updateProfileProps) {
 
   return (
     <div style={styles.container}>
@@ -66,8 +66,8 @@ export default function UpdateForm({user, setUser, updateProfile}: updateProfile
           <label style={styles.label}>Name</label>
           <input
             style={styles.input}
-            value={user.name}
-            onChange={(e) => setUser({ ...user, name: e.target.value })}
+            value={props.user.name}
+            onChange={(e) => props.setUser({ ...props.user, name: e.target.value })}
           />
         </div>
 
@@ -79,12 +79,12 @@ export default function UpdateForm({user, setUser, updateProfile}: updateProfile
               background: "#eee",
               cursor: "not-allowed",
             }}
-            value={user.email}
+            value={props.user.email}
             disabled
           />
         </div>
 
-        <button style={styles.button} onClick={updateProfile}>
+        <button style={styles.button} onClick={props.updateProfile}>
           Update Profile
         </button>
       </div>
