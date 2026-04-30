@@ -7,7 +7,6 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     background: "linear-gradient(135deg, #667eea, #764ba2)",
-    fontFamily: "Arial, sans-serif",
   },
   card: {
     background: "#fff",
@@ -50,7 +49,7 @@ export default function Home() {
   return (
     <div style={styles.container}>
       <div style={styles.card}>
-        <h1 style={styles.title}>Welcome 👋</h1>
+        <h1 style={styles.title}>Welcome</h1>
         <p style={styles.subtitle}>Login to access your dashboard</p>
 
         <button style={styles.button} onClick={login}>
