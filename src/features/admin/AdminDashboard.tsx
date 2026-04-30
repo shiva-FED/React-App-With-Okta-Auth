@@ -1,9 +1,21 @@
 import { useEffect, useState, type CSSProperties } from "react";
 import { type User } from "../../types/user";
 import { oktaAuth } from "../../auth/oktaConfig";
-import { getUsers, deleteuser } from "../../services/userService";
+import { getUsers, deleteuser, updateUser } from "../../services/userService";
+import UpdateForm from "../../shared/updateForm";
 
 const styles: { [key: string]: CSSProperties } = {
+  modalOverlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    background: "rgba(0,0,0,0.8)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   container: {
     padding: "20px",
     minHeight: "100vh",
@@ -59,6 +71,8 @@ const styles: { [key: string]: CSSProperties } = {
 
 export default function AdminDashboard() {
   const [users, setUsers] = useState<User[]>([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
   const fetchUsers = async () => {
     const res = await getUsers();
@@ -70,7 +84,22 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     fetchUsers();
+    window.addEventListener("focus", fetchUsers);
+
+    return () => window.removeEventListener("focus", fetchUsers);
   }, []);
+
+  const updateProfile = async () => {
+    if (!selectedUser) return;
+
+    await updateUser(selectedUser.id, selectedUser);
+
+    setUsers((prev) =>
+      prev.map((u) => (u.id === selectedUser.id ? selectedUser : u)),
+    );
+
+    setShowModal(false);
+  };
 
   const deleteUser = async (id: number) => {
     await deleteuser(id);
@@ -99,8 +128,29 @@ export default function AdminDashboard() {
             <button style={styles.deleteBtn} onClick={() => deleteUser(u.id)}>
               Delete
             </button>
+            <button
+              style={styles.deleteBtn}
+              onClick={() => {
+                setSelectedUser(u);
+                setShowModal(true);
+              }}
+            >
+              Edit
+            </button>
           </div>
         ))}
+
+        {showModal && selectedUser && (
+          <div style={styles.modalOverlay}>
+            <div className="modal">
+              <UpdateForm
+                user={selectedUser}
+                setUser={setSelectedUser}
+                updateProfile={updateProfile}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

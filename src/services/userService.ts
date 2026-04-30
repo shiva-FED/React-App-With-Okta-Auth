@@ -9,7 +9,7 @@ export const getUserByEmail = (email: string) => {
   return API.get<User[]>(`/users?email=${email}`);
 };
 
-export const updateUser = (id: number, data: User) => {
+export const updateUser = (id: number, data?: User) => {
   return API.put<User>(`/users/${id}`, data);
 };
 
